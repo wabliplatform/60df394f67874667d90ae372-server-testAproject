@@ -1,0 +1,144 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: lampralexandros@gmail.com
+  description: This is a sample openApi document
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://wabli.netlify.app/
+  title: TempApi
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- description: laughing-invention
+  url: http://83.212.100.226:3000/v1
+security:
+- {}
+tags:
+- description: not yet ready
+  name: temp
+paths:
+  /temp:
+    post:
+      operationId: createtemp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/temp'
+        description: data to be created
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/temp'
+          description: successful operation
+      summary: Creates the data
+      tags:
+      - temp
+      x-eov-operation-handler: controllers/TempController
+  /temp/{tempId}:
+    delete:
+      operationId: deletetemp
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: tempId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: successful operation
+      summary: Delete the element
+      tags:
+      - temp
+      x-eov-operation-handler: controllers/TempController
+    get:
+      operationId: gettemp
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: tempId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/temp'
+          description: successful operation
+      summary: Get the element
+      tags:
+      - temp
+      x-eov-operation-handler: controllers/TempController
+    put:
+      operationId: updatetemp
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: tempId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/temp'
+        description: data to be updated
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/temp'
+          description: successful operation
+      summary: Updates the element
+      tags:
+      - temp
+      x-eov-operation-handler: controllers/TempController
+  /temp/getAll:
+    get:
+      operationId: getAlltemp
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/temp'
+                type: array
+          description: successful operation
+      summary: Get all the data
+      tags:
+      - temp
+      x-method-getAll: "true"
+      x-eov-operation-handler: controllers/TempController
+components:
+  schemas:
+    temp:
+      example:
+        tempName: tempName
+        _id: _id
+      properties:
+        _id:
+          type: string
+        tempName:
+          type: string
+      required:
+      - tempName
+      type: object
